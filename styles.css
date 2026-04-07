@@ -1,0 +1,307 @@
+:root {
+  --bg: #090b13;
+  --glass: rgba(255, 255, 255, 0.14);
+  --glass-edge: rgba(255, 255, 255, 0.36);
+  --text: #eff6ff;
+  --muted: #b7c5da;
+  --accent: #9fd7ff;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at 0% 0%, #11182a 0%, var(--bg) 52%, #06070b 100%);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  padding: 1.2rem;
+}
+
+.ambient {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.4;
+  z-index: 0;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.ambient-1 {
+  width: 340px;
+  height: 340px;
+  background: linear-gradient(120deg, #3bb2ff, #7f96ff);
+  left: -80px;
+  top: -50px;
+}
+
+.ambient-2 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(120deg, #23d8af, #31c5ff);
+  right: -90px;
+  bottom: 20%;
+  animation-delay: 4s;
+}
+
+.ambient-3 {
+  width: 260px;
+  height: 260px;
+  background: linear-gradient(120deg, #9f7cff, #4ec8ff);
+  right: 25%;
+  top: 35%;
+  animation-delay: 2s;
+}
+
+.dashboard {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.tile {
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08)) border-box,
+    rgba(20, 24, 36, 0.38) padding-box;
+  border: 1px solid transparent;
+  border-top-color: var(--glass-edge);
+  border-left-color: rgba(255, 255, 255, 0.28);
+  border-radius: 1.4rem;
+  padding: 1rem;
+  backdrop-filter: blur(20px) saturate(120%);
+  box-shadow: var(--shadow);
+}
+
+.tile-time {
+  grid-column: span 4;
+  min-height: 190px;
+}
+
+.tile-weather {
+  grid-column: span 4;
+  min-height: 190px;
+}
+
+.tile-focus {
+  grid-column: span 4;
+}
+
+.tile-news {
+  grid-column: span 8;
+  min-height: 280px;
+}
+
+.tile-links {
+  grid-column: span 4;
+}
+
+.tile-notes {
+  grid-column: span 12;
+}
+
+.tile-label {
+  margin: 0;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+#clock {
+  margin: 0.5rem 0 0.2rem;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+}
+
+#date,
+#weatherDetail,
+#activity {
+  margin: 0;
+  color: #d8e5ff;
+}
+
+.tile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.icon-btn {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border-radius: 0.7rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.news-list {
+  margin: 0.2rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.news-list a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.news-list a:hover {
+  text-decoration: underline;
+}
+
+.link-grid {
+  margin-top: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.link-chip {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.link-chip:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+#focusQuote {
+  margin: 0.6rem 0;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+#notes {
+  margin-top: 0.6rem;
+  width: 100%;
+  min-height: 125px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 0.8rem;
+  font: inherit;
+  color: var(--text);
+  background: rgba(8, 14, 28, 0.45);
+}
+
+.screensaver {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+.screensaver.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.screensaver-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(58, 125, 255, 0.55), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(12, 200, 168, 0.45), transparent 27%),
+    linear-gradient(125deg, #04060a 0%, #0c1022 52%, #0b1f2f 100%);
+  animation: driftHue 16s linear infinite;
+}
+
+.screensaver-content {
+  position: relative;
+  max-width: 760px;
+  margin: 1rem;
+  text-align: center;
+  padding: 2.2rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(5, 8, 20, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+#screensaverQuote {
+  margin: 0.8rem 0;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+#screensaverClock {
+  font-size: clamp(1.8rem, 6vw, 3.8rem);
+  margin: 0.5rem 0;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(-12px) translateX(-8px);
+  }
+  to {
+    transform: translateY(14px) translateX(9px);
+  }
+}
+
+@keyframes driftHue {
+  from {
+    filter: hue-rotate(0deg) brightness(100%);
+  }
+  to {
+    filter: hue-rotate(360deg) brightness(110%);
+  }
+}
+
+@media (max-width: 980px) {
+  .tile-time,
+  .tile-weather,
+  .tile-focus,
+  .tile-links {
+    grid-column: span 6;
+  }
+
+  .tile-news,
+  .tile-notes {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 680px) {
+  .dashboard {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .tile {
+    grid-column: span 6 !important;
+  }
+
+  body {
+    padding: 0.8rem;
+  }
+}
