@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liquid Glass Bento Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+    <div class="ambient ambient-3"></div>
+
+    <main class="dashboard" aria-label="Bento dashboard">
+      <section class="tile tile-time">
+        <p class="tile-label">Now</p>
+        <h1 id="clock">--:--</h1>
+        <p id="date">Loading date…</p>
+      </section>
+
+      <section class="tile tile-weather">
+        <div class="tile-head">
+          <p class="tile-label">Weather</p>
+          <button id="refreshWeather" class="icon-btn" aria-label="Refresh weather">↻</button>
+        </div>
+        <h2 id="weatherSummary">Detecting location…</h2>
+        <p id="weatherDetail">Please wait.</p>
+      </section>
+
+      <section class="tile tile-news">
+        <div class="tile-head">
+          <p class="tile-label">News</p>
+          <button id="refreshNews" class="icon-btn" aria-label="Refresh news">↻</button>
+        </div>
+        <ul id="newsList" class="news-list">
+          <li>Loading top stories…</li>
+        </ul>
+      </section>
+
+      <section class="tile tile-links">
+        <p class="tile-label">Quick Links</p>
+        <div class="link-grid" id="linkGrid"></div>
+      </section>
+
+      <section class="tile tile-focus">
+        <p class="tile-label">Focus</p>
+        <h3 id="focusQuote">"Small progress is still progress."</h3>
+        <p id="activity">Screensaver starts after 45 seconds of inactivity.</p>
+      </section>
+
+      <section class="tile tile-notes">
+        <p class="tile-label">Today</p>
+        <textarea id="notes" placeholder="Write a quick plan..."></textarea>
+      </section>
+    </main>
+
+    <div id="screensaver" class="screensaver" aria-hidden="true">
+      <div class="screensaver-bg"></div>
+      <div class="screensaver-content">
+        <p class="tile-label">Inactivity mode</p>
+        <h2 id="screensaverQuote">"Discipline is remembering what you want."</h2>
+        <p id="screensaverClock">--:--</p>
+        <p>Move mouse, tap, or press any key to return.</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
