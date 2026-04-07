@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liquid Glass Bento Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+    <div class="ambient ambient-3"></div>
+
+    <main class="dashboard" aria-label="Bento dashboard">
+      <section class="tile tile-time">
+        <p class="tile-label">Now</p>
+        <h1 id="clock">--:--</h1>
+        <p id="date">Loading date…</p>
+        <p id="greeting">Hey there 👋</p>
+      </section>
+
+      <section class="tile tile-weather">
+        <div class="tile-head">
+          <p class="tile-label">Weather (°C)</p>
+          <button id="refreshWeather" class="icon-btn" aria-label="Refresh weather">↻</button>
+        </div>
+        <h2 id="weatherSummary">Detecting location…</h2>
+        <p id="weatherDetail">Please wait.</p>
+        <p id="weatherExtra">Humidity and rain chance loading…</p>
+      </section>
+
+      <section class="tile tile-focus">
+        <div class="tile-head">
+          <p class="tile-label">Focus</p>
+          <button id="newQuote" class="icon-btn" aria-label="New quote">✦</button>
+        </div>
+        <h3 id="focusQuote">"Small progress is still progress."</h3>
+        <p id="activity">Screensaver starts after 45 seconds of inactivity.</p>
+      </section>
+
+      <section class="tile tile-news">
+        <div class="tile-head">
+          <p class="tile-label">News</p>
+          <div class="toolbar">
+            <button id="newsTop" class="icon-btn active-chip" aria-label="Top stories">Top</button>
+            <button id="newsNew" class="icon-btn" aria-label="Newest stories">New</button>
+            <button id="refreshNews" class="icon-btn" aria-label="Refresh news">↻</button>
+          </div>
+        </div>
+        <ul id="newsList" class="news-list">
+          <li>Loading top stories…</li>
+        </ul>
+      </section>
+
+      <section class="tile tile-links">
+        <div class="tile-head">
+          <p class="tile-label">Quick Links</p>
+          <button id="addLink" class="icon-btn" aria-label="Add quick link">＋</button>
+        </div>
+        <div class="link-grid" id="linkGrid"></div>
+      </section>
+
+      <section class="tile tile-todo">
+        <div class="tile-head">
+          <p class="tile-label">Micro Tasks</p>
+          <button id="clearDone" class="icon-btn" aria-label="Remove completed tasks">✓</button>
+        </div>
+        <form id="todoForm" class="todo-form">
+          <input id="todoInput" placeholder="Add one small task..." />
+          <button class="icon-btn" type="submit" aria-label="Add task">Add</button>
+        </form>
+        <ul id="todoList" class="todo-list"></ul>
+      </section>
+
+      <section class="tile tile-system">
+        <p class="tile-label">System</p>
+        <p id="connectionState">Connection: checking…</p>
+        <p id="batteryState">Battery: unavailable</p>
+        <p id="streak">Focus streak: 0 minutes</p>
+        <p id="visibilityState">Tab: active</p>
+      </section>
+
+      <section class="tile tile-notes">
+        <p class="tile-label">Today</p>
+        <textarea id="notes" placeholder="Write a quick plan..."></textarea>
+      </section>
+    </main>
+
+    <aside id="bottomDrawer" class="bottom-drawer" aria-label="Bottom utility drawer">
+      <button id="drawerToggle" class="drawer-toggle" aria-expanded="false" aria-controls="drawerPanel">
+        ▲ Open utility drawer
+      </button>
+      <div id="drawerPanel" class="drawer-panel">
+        <section class="drawer-card">
+          <p class="tile-label">Pomodoro</p>
+          <p id="pomodoroTime" class="drawer-big">25:00</p>
+          <div class="drawer-controls">
+            <button id="pomodoroStart" class="icon-btn">Start</button>
+            <button id="pomodoroPause" class="icon-btn">Pause</button>
+            <button id="pomodoroReset" class="icon-btn">Reset</button>
+          </div>
+        </section>
+
+        <section class="drawer-card">
+          <p class="tile-label">World Clocks</p>
+          <ul id="worldClocks" class="compact-list"></ul>
+        </section>
+
+        <section class="drawer-card">
+          <p class="tile-label">Mini Command</p>
+          <form id="commandForm" class="command-form">
+            <input id="commandInput" placeholder="Try: note ship release" />
+            <button class="icon-btn" type="submit">Run</button>
+          </form>
+          <p id="commandResult" class="muted">Commands: note, quote, timer 15</p>
+        </section>
+
+        <section class="drawer-card">
+          <p class="tile-label">Weekly Habit</p>
+          <div id="habitGrid" class="habit-grid"></div>
+        </section>
+
+        <section class="drawer-card drawer-card-wide">
+          <div class="tile-head">
+            <p class="tile-label">Power Deck (100 micro-features)</p>
+            <span id="featureCount" class="muted">0 active</span>
+          </div>
+          <input id="featureSearch" placeholder="Filter features..." />
+          <div id="featureDeck" class="feature-deck"></div>
+        </section>
+      </div>
+    </aside>
+
+    <div id="screensaver" class="screensaver" aria-hidden="true">
+      <div class="screensaver-bg"></div>
+      <div class="stars" id="stars"></div>
+      <div class="screensaver-content">
+        <p class="tile-label">Inactivity mode</p>
+        <h2 id="screensaverQuote">"Discipline is remembering what you want."</h2>
+        <p id="screensaverClock">--:--</p>
+        <p>Move mouse, tap, or press any key to return.</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
